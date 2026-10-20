@@ -191,7 +191,7 @@
     </header>
 
     <div class="rows">
-      <a class="row is-selected" href="https://drive.google.com/drive/folders/1C3jUpjz0ucR4x6d7Y6eqeeurzwNdF1iS">
+      <a class="row" href="https://drive.google.com/drive/folders/1C3jUpjz0ucR4x6d7Y6eqeeurzwNdF1iS">
         <span class="label">Press kit<span class="sub">Artwork, GIFs, screenshots, titles, thumbnails, fact sheet</span></span>
       </a>
       <a class="row" href="https://store.steampowered.com/app/2918070/A_Tale_of_Sand_and_Bone/">
@@ -225,5 +225,28 @@
 
   <footer>© Talico. Press use only.</footer>
 </main>
+<script>
+  // The selection arrow follows the mouse, keyboard focus, and the up/down arrow keys.
+  (function () {
+    var rows = Array.prototype.slice.call(document.querySelectorAll(".row"));
+    var current = 0;
+    function select(i) {
+      current = (i + rows.length) % rows.length;
+      rows.forEach(function (row, j) {
+        row.classList.toggle("is-selected", j === current);
+        row.setAttribute("aria-selected", j === current ? "true" : "false");
+      });
+    }
+    rows.forEach(function (row, i) {
+      row.addEventListener("mouseenter", function () { select(i); });
+      row.addEventListener("focus", function () { select(i); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); select(current + 1); rows[current].focus(); }
+      if (e.key === "ArrowUp") { e.preventDefault(); select(current - 1); rows[current].focus(); }
+    });
+    select(0);
+  })();
+</script>
 </body>
 </html>
