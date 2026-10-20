@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Press Kit | A Tale of Sand and Bone</title>
+<meta name="description" content="Press kit for A Tale of Sand and Bone by Talico.">
+<style>
+  @font-face {
+    font-family: "m6x11";
+    src: url("m6x11.ttf") format("truetype");
+  }
+  /* Palette: the 42-colour set used by TOSAB's in-game UI */
+  :root {
+    --bg: #322a29;
+    --panel: #4a403f;
+    --edge: #685b59;
+    --muted: #998a82;
+    --text: #e7e3e1;
+    --white: #ffffff;
+    --amber: #ffae2e;
+    --orange: #ed7900;
+    --ink: #000000;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "m6x11", monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: none;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px; }
+  h1 { font-size: 48px; font-weight: normal; color: var(--white); margin: 0 0 8px; line-height: 1; }
+  h2 { font-size: 24px; font-weight: normal; color: var(--amber); margin: 40px 0 12px; }
+  .tagline { color: var(--muted); font-size: 24px; margin: 0 0 24px; }
+  .panel {
+    background: var(--panel);
+    border: 4px solid var(--edge);
+    padding: 16px 20px;
+  }
+  .panel p { margin: 0 0 12px; }
+  .panel ul { margin: 0; padding-left: 20px; }
+  a { color: var(--amber); }
+  .btn {
+    display: inline-block;
+    margin: 6px 12px 6px 0;
+    padding: 8px 16px;
+    background: var(--orange);
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .btn:hover { background: var(--amber); }
+  footer { margin-top: 48px; color: var(--muted); font-size: 16px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>A Tale of Sand and Bone</h1>
+  <p class="tagline">[One-line hook for the game]</p>
+
+  <h2>Downloads</h2>
+  <div class="panel">
+    <a class="btn" href="[GOOGLE_DRIVE_FOLDER_LINK]">Press assets (logos, screenshots, key art)</a>
+    <a class="btn" href="[TRAILER_LINK]">Watch trailer</a>
+    <a class="btn" href="[STEAM_PAGE_LINK]">Steam page</a>
+  </div>
+
+  <h2>About the game</h2>
+  <div class="panel">
+    <p>[Two or three sentences: what the game is, the genre, and what makes it stand out.]</p>
+    <ul>
+      <li><strong>Developer:</strong> Talico</li>
+      <li><strong>Genre:</strong> [genre]</li>
+      <li><strong>Platforms:</strong> PC (Steam)</li>
+      <li><strong>Release:</strong> [release date or status]</li>
+      <li><strong>Price:</strong> [price]</li>
+    </ul>
+  </div>
+
+  <h2>Press contact</h2>
+  <div class="panel">
+    <p>Interview, review key, and coverage requests: <a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a></p>
+  </div>
+
+  <footer>© Talico. Press use only.</footer>
+</main>
+</body>
+</html>
