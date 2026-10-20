@@ -10,80 +10,153 @@
     font-family: "m6x11";
     src: url("m6x11.ttf") format("truetype");
   }
-  /* Palette: the 42-colour set used by TOSAB's in-game UI */
+  /* Palette: the 42-colour set used by TOSAB's pause menu and interact prompt. */
   :root {
-    --bg: #322a29;
-    --panel: #4a403f;
-    --edge: #685b59;
-    --muted: #998a82;
-    --text: #e7e3e1;
-    --white: #ffffff;
-    --amber: #ffae2e;
-    --orange: #ed7900;
-    --ink: #000000;
+    --backdrop: #322a29;   /* behind the card, like the dimmed game */
+    --parchment: #ede1b8;  /* card body */
+    --band: #e0cba0;       /* header band and lit rows */
+    --shade: #d0ab7b;      /* band edge, row borders */
+    --key: #78220e;        /* key/link text */
+    --ink: #322a29;        /* titles and main text */
+    --body: #4a403f;       /* body text */
+    --muted: #685b59;      /* secondary text */
+    --danger: #d00000;
   }
+  * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--text);
+    min-height: 100vh;
+    background: var(--backdrop);
+    color: var(--body);
     font-family: "m6x11", monospace;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.4;
     -webkit-font-smoothing: none;
+    image-rendering: pixelated;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 48px 16px; }
-  h1 { font-size: 48px; font-weight: normal; color: var(--white); margin: 0 0 8px; line-height: 1; }
-  h2 { font-size: 24px; font-weight: normal; color: var(--amber); margin: 40px 0 12px; }
-  .tagline { color: var(--muted); font-size: 24px; margin: 0 0 24px; }
-  .panel {
-    background: var(--panel);
-    border: 4px solid var(--edge);
-    padding: 16px 20px;
+  main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
   }
-  .panel p { margin: 0 0 12px; }
-  .panel ul { margin: 0; padding-left: 20px; }
-  a { color: var(--amber); }
-  .btn {
-    display: inline-block;
-    margin: 6px 12px 6px 0;
-    padding: 8px 16px;
-    background: var(--orange);
+
+  /* Stepped corners, like the pause card: the corner is cut in 4px steps. */
+  .card {
+    background: var(--parchment);
+    clip-path: polygon(
+      4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+      0 calc(100% - 4px), 0 4px, 4px 4px
+    );
+  }
+  .header {
+    background: var(--band);
+    border-bottom: 4px solid var(--shade);
+    padding: 16px 16px 12px;
+    text-align: center;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: normal;
     color: var(--ink);
-    border: 4px solid var(--ink);
+    line-height: 1.1;
+  }
+  .header .tagline {
+    margin: 8px 0 0;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  .section-title {
+    margin: 24px 0 8px;
+    font-size: 16px;
+    color: var(--key);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Rows that light up in the band colour, like the pause menu rows. */
+  .rows { padding: 8px; display: grid; gap: 4px; }
+  .row {
+    display: block;
+    padding: 4px 12px;
+    background: var(--parchment);
+    border: 4px solid var(--shade);
+    color: var(--ink);
     text-decoration: none;
     font-size: 16px;
   }
-  .btn:hover { background: var(--amber); }
-  footer { margin-top: 48px; color: var(--muted); font-size: 16px; }
+  .row:hover, .row:focus-visible { background: var(--band); outline: none; }
+  .row small { display: block; color: var(--muted); font-size: 16px; }
+
+  .facts { padding: 12px 16px 16px; }
+  .facts p { margin: 0 0 12px; color: var(--body); }
+  .facts dl { margin: 0; display: grid; grid-template-columns: 96px 1fr; gap: 4px 8px; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; color: var(--ink); }
+
+  /* Hint tag hanging under the card, like the interact prompt. */
+  .hint {
+    margin: 16px auto 0;
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--band);
+    color: var(--key);
+    font-size: 16px;
+    text-decoration: none;
+    clip-path: polygon(
+      4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+      0 calc(100% - 4px), 0 4px, 4px 4px
+    );
+  }
+  .hint:hover { background: var(--shade); }
+  .hint-wrap { text-align: center; }
+
+  a { color: var(--key); }
+  footer {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 16px;
+  }
 </style>
 </head>
 <body>
 <main>
-  <h1>A Tale of Sand and Bone</h1>
-  <p class="tagline">[One-line hook for the game]</p>
+  <section class="card">
+    <header class="header">
+      <h1>A Tale of Sand and Bone</h1>
+      <p class="tagline">[One-line hook for the game]</p>
+    </header>
 
-  <h2>Downloads</h2>
-  <div class="panel">
-    <a class="btn" href="[GOOGLE_DRIVE_FOLDER_LINK]">Press assets (logos, screenshots, key art)</a>
-    <a class="btn" href="[TRAILER_LINK]">Watch trailer</a>
-    <a class="btn" href="[STEAM_PAGE_LINK]">Steam page</a>
-  </div>
+    <div class="facts">
+      <p>[Two or three sentences: what the game is, the genre, and what makes it stand out.]</p>
+      <dl>
+        <dt>Developer</dt><dd>Talico</dd>
+        <dt>Genre</dt><dd>[genre]</dd>
+        <dt>Platforms</dt><dd>PC (Steam)</dd>
+        <dt>Release</dt><dd>[release date or status]</dd>
+        <dt>Price</dt><dd>[price]</dd>
+      </dl>
+    </div>
+  </section>
 
-  <h2>About the game</h2>
-  <div class="panel">
-    <p>[Two or three sentences: what the game is, the genre, and what makes it stand out.]</p>
-    <ul>
-      <li><strong>Developer:</strong> Talico</li>
-      <li><strong>Genre:</strong> [genre]</li>
-      <li><strong>Platforms:</strong> PC (Steam)</li>
-      <li><strong>Release:</strong> [release date or status]</li>
-      <li><strong>Price:</strong> [price]</li>
-    </ul>
-  </div>
+  <h2 class="section-title">Downloads</h2>
+  <section class="card rows">
+    <a class="row" href="[GOOGLE_DRIVE_FOLDER_LINK]">Press assets<small>Logos, screenshots, key art</small></a>
+    <a class="row" href="[TRAILER_LINK]">Trailer<small>Watch on YouTube</small></a>
+    <a class="row" href="[STEAM_PAGE_LINK]">Steam page<small>Store page and wishlist</small></a>
+  </section>
 
-  <h2>Press contact</h2>
-  <div class="panel">
-    <p>Interview, review key, and coverage requests: <a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a></p>
+  <h2 class="section-title">Press contact</h2>
+  <section class="card facts">
+    <p>Interview, review key, and coverage requests:</p>
+    <p><a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a></p>
+  </section>
+
+  <div class="hint-wrap">
+    <a class="hint" href="mailto:[CONTACT_EMAIL]">Email us for press keys</a>
   </div>
 
   <footer>© Talico. Press use only.</footer>
