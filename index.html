@@ -10,23 +10,21 @@
     font-family: "m6x11";
     src: url("m6x11.ttf") format("truetype");
   }
-  /* Palette: the 42-colour set used by TOSAB's pause menu and interact prompt. */
+  /* Palette from the pause menu: parchment card, dark-red frame, ink text, near-black dim behind. */
   :root {
-    --backdrop: #322a29;   /* behind the card, like the dimmed game */
-    --parchment: #ede1b8;  /* card body */
-    --band: #e0cba0;       /* header band and lit rows */
-    --shade: #d0ab7b;      /* band edge, row borders */
-    --key: #78220e;        /* key/link text */
-    --ink: #322a29;        /* titles and main text */
-    --body: #4a403f;       /* body text */
-    --muted: #685b59;      /* secondary text */
-    --danger: #d00000;
+    --dim: #000000;
+    --parchment: #ede1b8;
+    --band: #e0cba0;     /* row hover, like a lit pause row */
+    --frame: #78220e;    /* card and row outlines */
+    --ink: #322a29;      /* titles and main text */
+    --body: #4a403f;     /* body text */
+    --muted: #685b59;    /* secondary text */
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     min-height: 100vh;
-    background: var(--backdrop);
+    background: var(--dim);
     color: var(--body);
     font-family: "m6x11", monospace;
     font-size: 24px;
@@ -37,84 +35,87 @@
   main {
     max-width: 720px;
     margin: 0 auto;
-    padding: 64px 24px 96px;
+    padding: 48px 24px 96px;
   }
 
-  /* Stepped corners, like the pause card: the corner is cut in 8px steps. */
-  .card {
-    background: var(--parchment);
+  /* Stepped corners: the frame is cut in 4px steps at every corner. */
+  .stepped {
     clip-path: polygon(
-      8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px, 100% calc(100% - 8px),
-      calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px),
-      0 calc(100% - 8px), 0 8px, 8px 8px
+      4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+      0 calc(100% - 4px), 0 4px, 4px 4px
     );
   }
-  .header {
-    background: var(--band);
-    border-bottom: 8px solid var(--shade);
-    padding: 32px 24px 24px;
-    text-align: center;
+  .card {
+    background: var(--parchment);
+    border: 4px solid var(--frame);
   }
-  .header h1 {
+
+  .hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+    border: 4px solid var(--frame);
+  }
+
+  .title {
     margin: 0;
+    padding: 32px 24px 8px;
+    text-align: center;
     font-size: 48px;
     font-weight: normal;
     color: var(--ink);
     line-height: 1.1;
   }
-  .header .tagline {
-    margin: 16px 0 0;
-    font-size: 24px;
+  .tagline {
+    margin: 0;
+    padding: 0 24px 24px;
+    text-align: center;
     color: var(--muted);
   }
-  /* Release date as a framed callout, so it's the first thing after the title. */
-  .header .release {
-    display: inline-block;
-    margin: 24px 0 0;
+
+  /* Release date as a boxed row, so it's the first thing under the tagline. */
+  .release {
+    margin: 0 auto 24px;
     padding: 8px 24px;
-    background: var(--parchment);
-    border: 8px solid var(--shade);
-    color: var(--key);
+    max-width: 480px;
+    text-align: center;
+    background: var(--band);
+    border: 4px solid var(--frame);
+    color: var(--ink);
     font-size: 32px;
   }
+
+  .facts { padding: 24px; }
+  .facts p { margin: 0 0 16px; color: var(--body); text-align: center; }
+  .facts dl { margin: 0; text-align: center; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0 0 12px; color: var(--ink); }
+
   .section-title {
     margin: 40px 0 16px;
-    font-size: 24px;
+    text-align: center;
+    font-size: 32px;
     font-weight: normal;
-    color: var(--key);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: var(--ink);
   }
 
-  /* Rows that light up in the band colour, like the pause menu rows. */
+  /* Option rows: boxed, centred labels, lit in the band colour on hover. */
   .rows { padding: 16px; display: grid; gap: 8px; }
   .row {
     display: block;
-    padding: 12px 24px;
+    padding: 8px 24px;
     background: var(--parchment);
-    border: 8px solid var(--shade);
+    border: 4px solid var(--frame);
     color: var(--ink);
+    text-align: center;
     text-decoration: none;
     font-size: 24px;
   }
   .row:hover, .row:focus-visible { background: var(--band); outline: none; }
-  .row small { display: block; color: var(--muted); font-size: 24px; }
+  .row small { display: block; color: var(--muted); font-size: 16px; }
 
-  .facts { padding: 24px 24px 32px; }
-  .facts p { margin: 0 0 16px; color: var(--body); }
-  .facts dl { margin: 0; display: grid; grid-template-columns: 160px 1fr; gap: 8px 16px; }
-  .facts dt { color: var(--muted); }
-  .facts dd { margin: 0; color: var(--ink); }
-
-  /* Key art across the top of the card, with the band edge under it. */
-  .hero {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-bottom: 8px solid var(--shade);
-  }
-
-  /* Screenshots in a framed grid, like the pause menu's bordered rows. */
   .gallery {
     padding: 16px;
     display: grid;
@@ -125,54 +126,34 @@
     display: block;
     width: 100%;
     height: auto;
-    border: 8px solid var(--shade);
-    background: var(--band);
+    border: 4px solid var(--frame);
   }
-  .gallery img:first-child { grid-column: 1 / -1; }
 
-  /* Hint tag hanging under the card, like the interact prompt. */
-  .hint-wrap { text-align: center; margin-top: 32px; }
-  .hint {
-    display: inline-block;
-    padding: 12px 24px;
-    background: var(--band);
-    color: var(--key);
-    font-size: 24px;
-    text-decoration: none;
-    clip-path: polygon(
-      8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px, 100% calc(100% - 8px),
-      calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px),
-      0 calc(100% - 8px), 0 8px, 8px 8px
-    );
-  }
-  .hint:hover { background: var(--shade); }
+  .contact { padding: 24px; text-align: center; color: var(--body); }
+  .contact a { color: var(--frame); }
 
-  a { color: var(--key); }
+  a { color: var(--frame); }
   footer {
     margin-top: 48px;
     text-align: center;
     color: var(--muted);
-    font-size: 24px;
+    font-size: 16px;
   }
 
   @media (max-width: 560px) {
     main { padding: 32px 16px 64px; }
+    .title { font-size: 32px; }
     .gallery { grid-template-columns: 1fr; }
-    .header h1 { font-size: 32px; }
-    .facts dl { grid-template-columns: 1fr; gap: 0; }
-    .facts dd { margin-bottom: 12px; }
   }
 </style>
 </head>
 <body>
 <main>
-  <section class="card">
+  <section class="card stepped">
     <img class="hero" src="assets/keyart-horizontal.png" alt="A Tale of Sand and Bone key art">
-    <header class="header">
-      <h1>A Tale of Sand and Bone</h1>
-      <p class="tagline">A roguelike action platformer full of goofy characters and big bosses.</p>
-      <p class="release">Release: 10 December 2026</p>
-    </header>
+    <h1 class="title">A Tale of Sand and Bone</h1>
+    <p class="tagline">A roguelike action platformer full of goofy characters and big bosses.</p>
+    <p class="release">Release: 10 December 2026</p>
 
     <div class="facts">
       <p>Fight, dash and climb through a sun-scorched Egyptian fantasy world that changes every run. Hand-drawn pixel art, a wide arsenal of weapons and items that combine differently each time, and a unique boss guarding each area.</p>
@@ -184,7 +165,7 @@
   </section>
 
   <h2 class="section-title">Downloads</h2>
-  <section class="card rows">
+  <section class="card stepped rows">
     <a class="row" href="[GOOGLE_DRIVE_FOLDER_LINK]">Press assets<small>Logos, screenshots, key art</small></a>
     <a class="row" href="[TRAILER_LINK]">Trailer<small>Watch on YouTube</small></a>
     <a class="row" href="https://store.steampowered.com/app/2918070/A_Tale_of_Sand_and_Bone/">Steam page<small>Store page and wishlist</small></a>
@@ -192,7 +173,7 @@
   </section>
 
   <h2 class="section-title">Screenshots</h2>
-  <section class="card gallery">
+  <section class="card stepped gallery">
     <img src="assets/necropolis-1.png" alt="Necropolis area screenshot">
     <img src="assets/prayer-room.jpg" alt="Prayer Room screenshot">
     <img src="assets/spawnhub.png" alt="Spawnhub screenshot">
@@ -200,14 +181,10 @@
   </section>
 
   <h2 class="section-title">Press contact</h2>
-  <section class="card facts">
+  <section class="card stepped contact">
     <p>Interview, review key, and coverage requests:</p>
     <p><a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a></p>
   </section>
-
-  <div class="hint-wrap">
-    <a class="hint" href="mailto:[CONTACT_EMAIL]">Email us for press keys</a>
-  </div>
 
   <footer>© Talico. Press use only.</footer>
 </main>
