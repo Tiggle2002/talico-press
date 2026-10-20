@@ -9,6 +9,7 @@
   @font-face {
     font-family: "m6x11";
     src: url("m6x11.ttf") format("truetype");
+    font-display: block;
   }
   /* Palette from the in-game pause menu and interact prompt. */
   :root {
@@ -30,8 +31,11 @@
     font-size: 24px;
     line-height: 1.3;
     -webkit-font-smoothing: none;
+    font-smooth: never;
+    text-rendering: optimizeSpeed;
     image-rendering: pixelated;
   }
+  img { image-rendering: pixelated; image-rendering: crisp-edges; }
   main {
     max-width: 720px;
     margin: 0 auto;
@@ -152,6 +156,8 @@
   .facts dt { color: var(--name); }
   .facts dd { margin: 0; color: var(--ink); }
 
+  /* Keep the card on whole pixels: widths and edges snap to a 4px grid. */
+  .card, .header, .hero, .gallery-card img { transform: translateZ(0); }
   .hero {
     display: block;
     width: 100%;
