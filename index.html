@@ -67,6 +67,16 @@
     font-size: 24px;
     color: var(--muted);
   }
+  /* Release date as a framed callout, so it's the first thing after the title. */
+  .header .release {
+    display: inline-block;
+    margin: 24px 0 0;
+    padding: 8px 24px;
+    background: var(--parchment);
+    border: 8px solid var(--shade);
+    color: var(--key);
+    font-size: 32px;
+  }
   .section-title {
     margin: 40px 0 16px;
     font-size: 24px;
@@ -161,17 +171,14 @@
     <header class="header">
       <h1>A Tale of Sand and Bone</h1>
       <p class="tagline">A roguelike action platformer full of goofy characters and big bosses.</p>
+      <p class="release">Release: 10 December 2026</p>
     </header>
 
     <div class="facts">
       <p>Fight, dash and climb through a sun-scorched Egyptian fantasy world that changes every run. Hand-drawn pixel art, a wide arsenal of weapons and items that combine differently each time, and a unique boss guarding each area.</p>
       <dl>
-        <dt>Developer</dt><dd>Talico</dd>
-        <dt>Publisher</dt><dd>Talico</dd>
         <dt>Genre</dt><dd>Action, Adventure, Roguelike</dd>
         <dt>Platforms</dt><dd>Windows</dd>
-        <dt>Release</dt><dd>Planned for 10 December 2026</dd>
-        <dt>Price</dt><dd>[price]</dd>
       </dl>
     </div>
   </section>
@@ -190,7 +197,6 @@
     <img src="assets/prayer-room.jpg" alt="Prayer Room screenshot">
     <img src="assets/spawnhub.png" alt="Spawnhub screenshot">
     <img src="assets/underground.png" alt="Underground area screenshot">
-    <img src="assets/characters.png" alt="Character art">
   </section>
 
   <h2 class="section-title">Press contact</h2>
