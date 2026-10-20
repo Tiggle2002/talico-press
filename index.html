@@ -96,6 +96,30 @@
   .facts dt { color: var(--muted); }
   .facts dd { margin: 0; color: var(--ink); }
 
+  /* Key art across the top of the card, with the band edge under it. */
+  .hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 8px solid var(--shade);
+  }
+
+  /* Screenshots in a framed grid, like the pause menu's bordered rows. */
+  .gallery {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 8px solid var(--shade);
+    background: var(--band);
+  }
+  .gallery img:first-child { grid-column: 1 / -1; }
+
   /* Hint tag hanging under the card, like the interact prompt. */
   .hint-wrap { text-align: center; margin-top: 32px; }
   .hint {
@@ -123,6 +147,7 @@
 
   @media (max-width: 560px) {
     main { padding: 32px 16px 64px; }
+    .gallery { grid-template-columns: 1fr; }
     .header h1 { font-size: 32px; }
     .facts dl { grid-template-columns: 1fr; gap: 0; }
     .facts dd { margin-bottom: 12px; }
@@ -132,18 +157,20 @@
 <body>
 <main>
   <section class="card">
+    <img class="hero" src="assets/keyart-horizontal.png" alt="A Tale of Sand and Bone key art">
     <header class="header">
       <h1>A Tale of Sand and Bone</h1>
-      <p class="tagline">[One-line hook for the game]</p>
+      <p class="tagline">A roguelike action platformer full of goofy characters and big bosses.</p>
     </header>
 
     <div class="facts">
-      <p>[Two or three sentences: what the game is, the genre, and what makes it stand out.]</p>
+      <p>Fight, dash and climb through a sun-scorched Egyptian fantasy world that changes every run. Hand-drawn pixel art, a wide arsenal of weapons and items that combine differently each time, and a unique boss guarding each area.</p>
       <dl>
         <dt>Developer</dt><dd>Talico</dd>
-        <dt>Genre</dt><dd>[genre]</dd>
-        <dt>Platforms</dt><dd>PC (Steam)</dd>
-        <dt>Release</dt><dd>[release date or status]</dd>
+        <dt>Publisher</dt><dd>Talico</dd>
+        <dt>Genre</dt><dd>Action, Adventure, Roguelike</dd>
+        <dt>Platforms</dt><dd>Windows</dd>
+        <dt>Release</dt><dd>Planned for 10 December 2026</dd>
         <dt>Price</dt><dd>[price]</dd>
       </dl>
     </div>
@@ -153,7 +180,17 @@
   <section class="card rows">
     <a class="row" href="[GOOGLE_DRIVE_FOLDER_LINK]">Press assets<small>Logos, screenshots, key art</small></a>
     <a class="row" href="[TRAILER_LINK]">Trailer<small>Watch on YouTube</small></a>
-    <a class="row" href="[STEAM_PAGE_LINK]">Steam page<small>Store page and wishlist</small></a>
+    <a class="row" href="https://store.steampowered.com/app/2918070/A_Tale_of_Sand_and_Bone/">Steam page<small>Store page and wishlist</small></a>
+    <a class="row" href="https://store.steampowered.com/app/3175120/A_Tale_of_Sand_and_Bone_Demo/">Free demo<small>Play on Steam</small></a>
+  </section>
+
+  <h2 class="section-title">Screenshots</h2>
+  <section class="card gallery">
+    <img src="assets/necropolis-1.png" alt="Necropolis area screenshot">
+    <img src="assets/prayer-room.jpg" alt="Prayer Room screenshot">
+    <img src="assets/spawnhub.png" alt="Spawnhub screenshot">
+    <img src="assets/underground.png" alt="Underground area screenshot">
+    <img src="assets/characters.png" alt="Character art">
   </section>
 
   <h2 class="section-title">Press contact</h2>
